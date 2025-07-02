@@ -6,9 +6,8 @@
  */
 
 import React, { useEffect } from 'react';
-import { AMapSdk } from 'react-native-amap3d';
+import { AMapSdk, MapView } from 'react-native-amap3d';
 import { Platform, StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import { NewAppScreen } from '@react-native/new-app-screen';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -22,13 +21,25 @@ function App() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
+      <MapView
+        style={styles.map}
+        initialCameraPosition={{
+          target: {
+            latitude: 39.91095,
+            longitude: 116.37296,
+          },
+          zoom: 10,
+        }}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  map: {
     flex: 1,
   },
 });
