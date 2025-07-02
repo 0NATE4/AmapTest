@@ -7,7 +7,7 @@
 
 import React, { useEffect } from 'react';
 import { AMapSdk, MapView } from 'react-native-amap3d';
-import { Platform, StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, useColorScheme, View, TextInput, TouchableOpacity } from 'react-native';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -21,6 +21,7 @@ function App() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      
       <MapView
         style={styles.map}
         initialCameraPosition={{
@@ -31,6 +32,20 @@ function App() {
           zoom: 10,
         }}
       />
+      
+      {/* Search Bar Overlay */}
+      <View style={styles.searchContainer}>
+        <View style={styles.searchBar}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search for places..."
+            placeholderTextColor="#999"
+          />
+          <TouchableOpacity style={styles.searchButton}>
+            <View style={styles.searchIcon} />
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 }
@@ -41,6 +56,43 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
+  },
+  searchContainer: {
+    position: 'absolute',
+    top: 50,
+    left: 20,
+    right: 20,
+    zIndex: 1,
+  },
+  searchBar: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderRadius: 25,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 16,
+    color: '#333',
+  },
+  searchButton: {
+    marginLeft: 10,
+  },
+  searchIcon: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: '#007AFF',
   },
 });
 
