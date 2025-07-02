@@ -5,11 +5,19 @@
  * @format
  */
 
+import React, { useEffect } from 'react';
+import { AMapSdk } from 'react-native-amap3d';
+import { Platform, StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
 import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
+
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      AMapSdk.init('e676248d5eb741c3f18e4d92bd1e3f96');
+    }
+  }, []);
 
   return (
     <View style={styles.container}>
